@@ -1,0 +1,108 @@
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h2 {
+  color: #2c3e50;
+  border-bottom: 3px solid #3f51b5;
+  display: inline-block;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.page-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.new-task-button {
+  align-self: flex-start;
+  background-color: #1565c0;
+  color: #ffffff;
+  font-family: inherit;
+  font-weight: 600;
+  text-transform: none;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(21, 101, 192, 0.25);
+}
+
+.new-task-button:hover {
+  background-color: #0f4a8c;
+}
+
+.task-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 22px;
+}
+
+.task-item-card {
+  border-radius: 14px;
+  box-shadow: 0 18px 35px rgba(28, 45, 68, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+  border: 1px solid transparent;
+  background-color: white;
+}
+
+.task-item-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 38px rgba(28, 45, 68, 0.12);
+}
+
+.task-item-card.task-closed {
+  background-color: #f2f2f2;
+  border-color: #d8d8d8;
+}
+
+.task-item-card mat-card-header {
+  padding: 18px 18px 12px;
+}
+
+.task-item-card mat-card-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.task-item-card mat-card-subtitle {
+  color: #606060;
+}
+
+.task-item-card .closed-label {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: #dcdcdc;
+  color: #424242;
+  font-size: 0.9rem;
+}
+
+.task-item-card .task-details p {
+  margin: 8px 0;
+}
+
+.task-item-card .type-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 0.85rem;
+  color: #334358;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+  background: #fafafa;
+}
+.error-snackbar {
+  background-color: #f44336 !important; // אדום Material
+  color: white !important;
+  font-weight: bold;
+}

@@ -1,0 +1,17 @@
+<div class="page-container" dir="rtl">
+  <div class="page-header">
+    <h2 class="page-title">לוח משימות</h2>
+    <button mat-raised-button color="primary" class="new-task-button" (click)="openCreateModal()">
+      + משימה חדשה
+    </button>
+  </div>
+
+  <div class="task-grid">
+    <mat-card *ngFor="let task of tasks$ | async" class="task-item-card" [class.task-closed]="task.isClosed">
+      <app-task-card [task]="task" (edit)="editTask($event)" (close)="closeTask($event)"></app-task-card>
+     
+    </mat-card>
+  </div>
+</div>
+
+

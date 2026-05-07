@@ -1,0 +1,42 @@
+:host {
+  display: block;
+  font-family: inherit;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px 0 0;
+}
+
+.full-width {
+  width: 100%;
+}
+
+mat-dialog-content {
+  padding: 0;
+}
+
+mat-dialog-actions.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 18px;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.dynamic-field {
+  width: 100%;
+}
+
+button[mat-button] {
+  font-family: inherit;
+}
+
+button[mat-raised-button] {
+  font-family: inherit;
+}

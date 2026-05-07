@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>{{ isEditMode ? 'עדכון משימה' : 'משימה חדשה' }}</h2>
+
+<div [formGroup]="taskForm">
+  <mat-dialog-content>
+    <div class="form-container">
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>כותרת</mat-label>
+        <input matInput formControlName="title" placeholder="למשל: תקלה במסך התחברות">
+        <mat-error *ngIf="taskForm.get('title')?.hasError('required')">חובה להזין כותרת</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>סוג משימה</mat-label>
+        <mat-select formControlName="type">
+          <mat-option [value]="1">רכש</mat-option>
+          <mat-option [value]="2">פיתוח</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+       <mat-form-field appearance="fill" class="full-width">
+        <mat-label>תיאור</mat-label>
+        <textarea matInput formControlName="description" rows="4"></textarea>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width" *ngIf="isEditMode">
+        <mat-label>סטטוס נוכחי</mat-label>
+        <mat-select formControlName="currentStatus" (selectionChange)="onStatusChange($event.value)">
+          <mat-option *ngFor="let s of statuses" [value]="s.statusId">
+            {{s.statusName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>הקצה למשתמש</mat-label>
+        <mat-select formControlName="assignedUserId">
+          <mat-option [value]="null">ללא הקצאה</mat-option>
+          <mat-option *ngFor="let user of allUsers" [value]="user.id">
+            {{user.fullName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+     
+
+      <!-- שדות דינמיים -->
+      <div *ngFor="let field of dynamicFields" class="dynamic-field">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{field.label}}</mat-label>
+          <input matInput [type]="field.type" [value]="taskForm.get('customData')?.value?.[field.key] || ''" (input)="updateCustomData(field.key, $event.target.value)">
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-dialog-content>
+
+  <mat-dialog-actions align="end" class="dialog-actions">
+    <button mat-button (click)="onCancel()">ביטול</button>
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="taskForm.invalid">
+      שמור משימה
+    </button>
+  </mat-dialog-actions>
+</div>

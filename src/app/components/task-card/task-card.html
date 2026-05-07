@@ -1,0 +1,44 @@
+ <mat-card-header [class.task-closed]="task.isClosed">
+        <mat-card-title>{{ task.title }}</mat-card-title>
+        <mat-icon *ngIf="task.isClosed" color="primary">check_circle</mat-icon>
+        <mat-card-subtitle>משימה #{{ task.id }}</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p *ngIf="task.isClosed" class="closed-label">משימה זו הושלמה</p>
+         <div class="task-details">
+           <p><strong>תיאור:</strong> {{ task.description }}</p> 
+           <p><strong>מטופל ע"י:</strong> {{ task.assignedUserName }}</p>
+          <p>
+             <span class="type-tag" [style.background-color]="task.type === 1 ? '#e3f2fd' : '#f1f8e9'">
+              {{ task.type === 1 ? 'רכש' : 'פיתוח' }}
+            </span> 
+          </p>
+          <p><strong>סטטוס נוכחי:</strong> {{ task.statusName }}</p>
+        </div> 
+              <!-- <div class="custom-data" *ngIf="parseCustomData(task.customDataJson) as data"> -->
+  <!-- אם זה רכש, נציג מחיר -->
+  <!-- <p *ngIf="task.type === 1 && data.Price !== undefined">
+    <strong>מחיר:</strong> {{ data.Price | currency:'ILS' }}
+  </p> -->
+  
+  <!-- אם זה פיתוח, נציג גרסה -->
+  <!-- <p *ngIf="task.type === 2 && data.Version">
+    <strong>גרסה מיועדת:</strong> {{ data.Version }}
+  </p> -->
+
+<!-- </div> -->
+
+      </mat-card-content>
+
+      <mat-divider></mat-divider>
+      <mat-card-actions align="end">
+    <button mat-mini-fab color="accent" *ngIf="!task.isClosed" (click)="onEdit()" title="ערוך משימה">
+      <mat-icon>edit</mat-icon> 
+    </button>
+    <button mat-mini-fab color="accent" *ngIf="!task.isClosed" (click)="onClose()" title="סגור משימה" style="margin-right: 8px;">
+       <mat-icon>close</mat-icon>
+
+    </button>
+  </mat-card-actions>
+
