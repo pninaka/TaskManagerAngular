@@ -15,19 +15,13 @@
             </span> 
           </p>
           <p><strong>סטטוס נוכחי:</strong> {{ task.statusName }}</p>
+          <!-- <div *ngIf="task.customDataJson" class="dynamic-data-section">
+      <div *ngFor="let item of task.customDataJson | keyvalue" class="data-item">
+        <strong>{{ item.key }}:</strong> {{ item.value }}
+      </div>
+    </div> -->
         </div> 
-              <!-- <div class="custom-data" *ngIf="parseCustomData(task.customDataJson) as data"> -->
-  <!-- אם זה רכש, נציג מחיר -->
-  <!-- <p *ngIf="task.type === 1 && data.Price !== undefined">
-    <strong>מחיר:</strong> {{ data.Price | currency:'ILS' }}
-  </p> -->
-  
-  <!-- אם זה פיתוח, נציג גרסה -->
-  <!-- <p *ngIf="task.type === 2 && data.Version">
-    <strong>גרסה מיועדת:</strong> {{ data.Version }}
-  </p> -->
 
-<!-- </div> -->
 
       </mat-card-content>
 

@@ -16,7 +16,6 @@ import { TaskStateService } from './services/taskStateService';
 export class App implements OnInit {
   // protected readonly title = signal('TaskManager-UI');
   tasks$!: Observable<TaskItem[]>;
-  currentUserId = 1;
 
   constructor(
     private taskService: TaskService,
@@ -28,7 +27,8 @@ export class App implements OnInit {
   }
 
   ngOnInit(): void {
-    this.taskService.getUserTasks(this.currentUserId).subscribe((tasks) => {
+    const userId = this.taskState.currentUserId;
+    this.taskService.getUserTasks(userId).subscribe((tasks) => {
       this.taskState.setTasks(tasks);
     });
   }
