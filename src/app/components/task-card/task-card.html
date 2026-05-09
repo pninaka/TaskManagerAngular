@@ -15,11 +15,11 @@
             </span> 
           </p>
           <p><strong>סטטוס נוכחי:</strong> {{ task.statusName }}</p>
-          <!-- <div *ngIf="task.customDataJson" class="dynamic-data-section">
-      <div *ngFor="let item of task.customDataJson | keyvalue" class="data-item">
-        <strong>{{ item.key }}:</strong> {{ item.value }}
+          <div *ngIf="task.customData" class="dynamic-data-section">
+      <div *ngFor="let item of task.customData | keyvalue" class="data-item">
+        <strong>{{ getLabel(item.key) }}:</strong> {{ item.value }}
       </div>
-    </div> -->
+    </div>
         </div> 
 
 

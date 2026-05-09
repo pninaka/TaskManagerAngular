@@ -20,5 +20,16 @@ export class TaskCard {
   onClose() {
     this.close.emit(this.task);
   }
-
+getLabel(key: string): string {
+  const labels: { [key: string]: string } = {
+    price1: 'הצעת מחיר א',
+    price2: 'הצעת מחיר ב',
+    vendor: 'ספק',
+    receipt: 'קבלה',
+    SpecificationText: 'תיאור תיקון',
+    BranchName: 'BranchName',
+    VersionNumber: 'גרסה'
+  };
+  return labels[key] || key; // מחזיר את הלייבל או את המפתח המקורי אם לא נמצא תרגום
+}
 }

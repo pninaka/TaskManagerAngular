@@ -9,7 +9,7 @@ export interface TaskItem {
     statusName : string;
     isClosed: boolean;
     customDataJson?: string;
-    //customData?: Record<string, any>;
+    customData?: string;
 }
 
 export interface StatusDefinition {
