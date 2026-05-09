@@ -30,8 +30,8 @@ export class TaskForm implements OnInit {
       title: ['', [Validators.required, Validators.minLength(3)]],
       description: [''],
       type: [1, Validators.required], // 1 = טכני כברירת מחדל
-      currentStatus: [null],
-      assignedUserId: [null],
+      currentStatus: [1, Validators.required],
+      assignedUserId: [null, Validators.required],
       customData: [{}],
     });
   }
@@ -126,22 +126,35 @@ export class TaskForm implements OnInit {
 
     if (taskType === 1 && statusId === 2) {
       this.dynamicFields = [
-        { key: 'price1', label: 'הצעת מחיר א', type: 'number' },
-        { key: 'price2', label: 'הצעת מחיר ב', type: 'number' },
-        { key: 'vendor', label: 'שם ספק', type: 'text' },
+        { key: 'price1', label: 'הצעת מחיר א', type: 'number',required: true },
+        { key: 'price2', label: 'הצעת מחיר ב', type: 'number',required: true },
+        { key: 'vendor', label: 'שם ספק', type: 'text',required: true },
       ];
     } else if (taskType === 1 && statusId === 3) {
-      this.dynamicFields = [{ key: 'receipt', label: 'קבלות', type: 'string' }];
+      this.dynamicFields = [{ key: 'receipt', label: 'קבלות', type: 'string',required: true }];
     } else if (taskType === 2 && statusId === 2) {
-      this.dynamicFields = [{ key: 'SpecificationText', label: 'תיאור התיקון', type: 'string' }];
+      this.dynamicFields = [{ key: 'SpecificationText', label: 'תיאור התיקון', type: 'string',required: true }];
     } else if (taskType === 2 && statusId === 3) {
-      this.dynamicFields = [{ key: 'BranchName', label: 'BranchName', type: 'string' }];
+      this.dynamicFields = [{ key: 'BranchName', label: 'BranchName', type: 'string',required: true }];
     } else if (taskType === 2 && statusId === 4) {
-      this.dynamicFields = [{ key: 'VersionNumber', label: 'מספר גרסה', type: 'number' }];
+      this.dynamicFields = [{ key: 'VersionNumber', label: 'מספר גרסה', type: 'number',required: true }];
     } else {
       this.dynamicFields = [];
     }
   }
+  isDynamicFormValid(): boolean {
+  // אם אין שדות דינאמיים, זה תקין
+  if (!this.dynamicFields || this.dynamicFields.length === 0) return true;
+
+  const customData = this.taskForm.get('customData')?.value || {};
+  
+  // בדיקה שכל שדה שמוגדר כ-required אכן קיים ויש בו ערך
+  return this.dynamicFields.every(field => {
+    if (!field.required) return true;
+    const value = customData[field.key];
+    return value !== undefined && value !== null && value !== '';
+  });
+}
   updateCustomData(key: string, value: any) {
     const currentData = this.taskForm.get('customData')?.value || {};
     // מעדכנים רק את השדה הספציפי

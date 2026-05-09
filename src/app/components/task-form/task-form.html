@@ -41,6 +41,9 @@
             {{user.fullName}}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="taskForm.get('assignedUserId')?.hasError('required')">
+    חובה לבחור משתמש
+  </mat-error>
       </mat-form-field>
 
      
@@ -51,13 +54,16 @@
           <mat-label>{{field.label}}</mat-label>
           <input matInput [type]="field.type" [value]="taskForm.get('customData')?.value?.[field.key] || ''" (input)="updateCustomData(field.key, $event.target.value)">
         </mat-form-field>
+        <mat-hint *ngIf="field.required && !taskForm.get('customData')?.value?.[field.key]" style="color: red;">
+      שדה חובה
+    </mat-hint>
       </div>
     </div>
   </mat-dialog-content>
 
   <mat-dialog-actions align="end" class="dialog-actions">
     <button mat-button (click)="onCancel()">ביטול</button>
-    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="taskForm.invalid">
+    <button mat-raised-button color="primary" (click)="onSave()" [disabled]="taskForm.invalid || !isDynamicFormValid()">
       שמור משימה
     </button>
   </mat-dialog-actions>
